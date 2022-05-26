@@ -18,5 +18,5 @@ src\main\resources\send.json に構造かいてます
 
 ```mermaid
 graph LR;
-    A[ですよ]-->B[ですね];
+    A[ですよ] -->|なにかしら| B[ですね];
 ```
