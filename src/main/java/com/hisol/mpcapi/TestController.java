@@ -3,6 +3,7 @@ package com.hisol.mpcapi;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,14 @@ public class TestController {
     public List<TestImage> greeting(@RequestParam(value="name", defaultValue="World") String name) {
         log.debug("nameは～{}", name);
 
-        Collections.shuffle(prop.getImages());
+        List<String> clone = new ArrayList<>(prop.getImages().size());
+        for (String kore : prop.getImages()) {
+            clone.add(kore);
+        }
+        Collections.shuffle(clone, ThreadLocalRandom.current());
         List<TestImage> result = new ArrayList<>();
-        result.add(new TestImage(counter.incrementAndGet(), String.format(template, name), prop.getImages().get(0)));
-        result.add(new TestImage(counter.incrementAndGet(), String.format(template, name), prop.getImages().get(1)));
+        result.add(new TestImage(counter.incrementAndGet(), String.format(template, name), clone.get(0)));
+        result.add(new TestImage(counter.incrementAndGet(), String.format(template, name), clone.get(1)));
 
         return result;
     }
