@@ -67,5 +67,34 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<profiles>
+		<profile>
+			<id>prod</id>
+			<build>
+				<resources>
+					<!-- 順番重要 ```mvn package -Pprod``` -->
+					<resource>
+						<directory>src/main/resources/prod</directory>						
+					</resource>
+					<resource>
+						<directory>src/main/resources</directory>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>dev1</id>
+			<build>
+				<resources>
+					<!-- 順番重要 ```mvn package -Pdev1``` -->
+					<resource>
+						<directory>src/main/resources/dev1</directory>
+					</resource>
+					<resource>
+						<directory>src/main/resources</directory>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+	</profiles>
 </project>
